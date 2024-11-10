@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Booking</title>
+    <link rel="stylesheet" href="trainbookingstyles.css">
+</head>
+<body>
+
+    <a href="home.html" class="home-button">Home</a>
+
+    <div class="booking-form">
+        <h2>Train Booking</h2>
+        <form id="trainBookingForm">
+            <div class="form-group">
+                <label for="origin">From:</label>
+                <select name="origin" id="origin" required>
+                    <option value="">Select Origin</option>
+                    <option value="NDLS">New Delhi (NDLS)</option>
+                    <option value="BCT">Mumbai Central (BCT)</option>
+                    <option value="HWH">Howrah Junction (HWH)</option>
+                    <option value="MAS">Chennai Central (MAS)</option>
+                    <option value="SBC">Bangalore City Junction (SBC)</option>
+                    <option value="CSMT">Chhatrapati Shivaji Terminus (CSMT)</option>
+                    <option value="LKO">Lucknow Junction (LKO)</option>
+                    <option value="PNBE">Patna Junction (PNBE)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="destination">To:</label>
+                <select name="destination" id="destination" required>
+                    <option value="">Select Destination</option>
+                    <option value="NDLS">New Delhi (NDLS)</option>
+                    <option value="BCT">Mumbai Central (BCT)</option>
+                    <option value="HWH">Howrah Junction (HWH)</option>
+                    <option value="MAS">Chennai Central (MAS)</option>
+                    <option value="SBC">Bangalore City Junction (SBC)</option>
+                    <option value="CSMT">Chhatrapati Shivaji Terminus (CSMT)</option>
+                    <option value="LKO">Lucknow Junction (LKO)</option>
+                    <option value="PNBE">Patna Junction (PNBE)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date">Date of Journey:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="class">Class:</label>
+                <select name="class" id="class" required>
+                    <option value="GEN">General (GEN)</option>
+                    <option value="SL">Sleeper (SL)</option>
+                    <option value="3A">Third AC (3A)</option>
+                    <option value="2A">Second AC (2A)</option>
+                    <option value="1A">First AC (1A)</option>
+                </select>
+            </div>
+            <button type="button" class="submit-btn" onclick="displayTrainResults()">Search Trains</button>
+        </form>
+    </div>
+
+    <div id="trainResults" class="train-results" style="display:none;">
+        <h3>Available Trains</h3>
+        <div id="trainDetailsContainer"></div>
+    </div>
+
+    <script>
+        function displayTrainResults() {
+            const origin = document.getElementById('origin').value;
+            const destination = document.getElementById('destination').value;
+            const trainResults = document.getElementById('trainResults');
+            const trainDetailsContainer = document.getElementById('trainDetailsContainer');
+            trainDetailsContainer.innerHTML = ''; 
+
+            const routes = {
+                "NDLS-BCT": [
+                    { name: "Rajdhani Express", number: "12951", dep: "06:00 AM", arr: "02:30 PM", class: "AC 3 Tier" },
+                    { name: "Garib Rath Express", number: "12909", dep: "10:00 AM", arr: "08:30 PM", class: "AC Chair Car" }
+                ],
+                "BCT-HWH": [
+                    { name: "Gitanjali Express", number: "12860", dep: "06:00 AM", arr: "08:00 PM", class: "Second AC" },
+                    { name: "Duronto Express", number: "12261", dep: "08:00 PM", arr: "10:00 AM", class: "AC 3 Tier" }
+                ],
+                "NDLS-HWH": [
+                    { name: "Poorva Express", number: "12303", dep: "08:05 AM", arr: "05:30 PM", class: "First AC" },
+                    { name: "Howrah Rajdhani", number: "12301", dep: "04:55 PM", arr: "08:05 AM", class: "First AC" }
+                ],
+                "MAS-SBC": [
+                    { name: "Shatabdi Express", number: "12028", dep: "06:00 AM", arr: "12:00 PM", class: "Executive Chair Car" },
+                    { name: "Chennai Express", number: "12610", dep: "04:00 PM", arr: "11:00 PM", class: "Sleeper" }
+                ],
+                "LKO-PNBE": [
+                    { name: "Sapt Kranti Express", number: "12557", dep: "07:10 PM", arr: "04:00 AM", class: "Third AC" },
+                    { name: "Vikramshila Express", number: "12368", dep: "09:50 AM", arr: "06:00 PM", class: "Second AC" }
+                ],
+                "NDLS-MAS": [
+                    { name: "Tamil Nadu Express", number: "12622", dep: "10:30 PM", arr: "06:25 AM", class: "Sleeper" },
+                    { name: "Grand Trunk Express", number: "12616", dep: "07:05 AM", arr: "08:00 PM", class: "First AC" }
+                ],
+                "PNBE-HWH": [
+                    { name: "Janshatabdi Express", number: "12366", dep: "06:10 AM", arr: "01:30 PM", class: "Chair Car" },
+                    { name: "Vibhuti Express", number: "12334", dep: "10:15 PM", arr: "05:50 AM", class: "Third AC" }
+                ]
+            };
+
+            const routeKey = `${origin}-${destination}`;
+
+            if (routes[routeKey]) {
+                routes[routeKey].forEach(train => {
+                    trainDetailsContainer.innerHTML += `
+                        <div class="train-details">
+                            <p><strong>Train Name:</strong> ${train.name}</p>
+                            <p><strong>Train Number:</strong> ${train.number}</p>
+                            <p><strong>Departure:</strong> ${train.dep}</p>
+                            <p><strong>Arrival:</strong> ${train.arr}</p>
+                            <p><strong>Class:</strong> ${train.class}</p>
+                        </div>
+                    `;
+                });
+            } else {
+                
+                const defaultTrains = [
+                    { name: "Express Train", number: "99999", dep: "09:00 AM", arr: "06:00 PM", class: "Sleeper" },
+                    { name: "Intercity Express", number: "88888", dep: "11:00 AM", arr: "08:00 PM", class: "AC Chair Car" }
+                ];
+                defaultTrains.forEach(train => {
+                    trainDetailsContainer.innerHTML += `
+                        <div class="train-details">
+                            <p><strong>Train Name:</strong> ${train.name}</p>
+                            <p><strong>Train Number:</strong> ${train.number}</p>
+                            <p><strong>Departure:</strong> ${train.dep}</p>
+                            <p><strong>Arrival:</strong> ${train.arr}</p>
+                            <p><strong>Class:</strong> ${train.class}</p>
+                        </div>
+                    `;
+                });
+            }
+
+            trainResults.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>

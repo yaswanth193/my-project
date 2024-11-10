@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking</title>
+    <link rel="stylesheet" href="flightbookingstyles.css">
+    
+</head>
+<body>
+    <a href="home.html" class="home-button">Home</a>
+    <h1>Flight Booking</h1>
+    <div class="form-container">
+        <label for="departure">Departure:</label>
+        <select id="departure">
+            <option value="DEL">Delhi</option>
+            <option value="BOM">Mumbai</option>
+            <option value="BLR">Bangalore</option>
+            <option value="HYD">Hyderabad</option>
+            <option value="MAA">Chennai</option>
+            <option value="CCU">Kolkata</option>
+            <option value="AMD">Ahmedabad</option>
+            <option value="GOI">Goa</option>
+            <option value="COK">Cochin</option>
+            <option value="PNQ">Pune</option>
+        </select>
+
+        <label for="arrival">Arrival:</label>
+        <select id="arrival">
+            <option value="DEL">Delhi</option>
+            <option value="BOM">Mumbai</option>
+            <option value="BLR">Bangalore</option>
+            <option value="HYD">Hyderabad</option>
+            <option value="MAA">Chennai</option>
+            <option value="CCU">Kolkata</option>
+            <option value="AMD">Ahmedabad</option>
+            <option value="GOI">Goa</option>
+            <option value="COK">Cochin</option>
+            <option value="PNQ">Pune</option>
+        </select>
+        <label for="date">Travel Date:</label>
+        <input type="date" id="date" required>
+        <button onclick="filterFlights()">Search Flights</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Flight Number</th>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th>Time</th>
+                <th>Duration</th>
+                <th>Cost</th>
+            </tr>
+        </thead>
+        <tbody id="flightTableBody">
+            
+        </tbody>
+    </table>
+
+    <script>
+        const flights = [
+            // Delhi to others
+            { flightNumber: "AI101", departure: "DEL", arrival: "BOM", time: "10:00 AM", duration: "2.5h", cost: "12000/-" },
+            { flightNumber: "AI102", departure: "DEL", arrival: "BLR", time: "12:30 PM", duration: "2.5h", cost: "15000/-" },
+            { flightNumber: "AI103", departure: "DEL", arrival: "HYD", time: "3:00 PM", duration: "2.5h", cost: "14000/-" },
+            { flightNumber: "AI104", departure: "DEL", arrival: "MAA", time: "5:30 PM", duration: "3h", cost: "15500/-" },
+            { flightNumber: "AI105", departure: "DEL", arrival: "CCU", time: "6:00 AM", duration: "2.5h", cost: "13000/-" },
+            { flightNumber: "AI106", departure: "DEL", arrival: "AMD", time: "7:30 AM", duration: "2.5h", cost: "12500/-" },
+            { flightNumber: "AI107", departure: "DEL", arrival: "GOI", time: "8:30 AM", duration: "2h", cost: "11500/-" },
+            { flightNumber: "AI108", departure: "DEL", arrival: "COK", time: "9:00 AM", duration: "3h", cost: "13500/-" },
+            { flightNumber: "AI109", departure: "DEL", arrival: "PNQ", time: "10:30 AM", duration: "2.5h", cost: "14000/-" },
+
+            // Mumbai to others
+            { flightNumber: "AI201", departure: "BOM", arrival: "DEL", time: "1:00 PM", duration: "2.5h", cost: "12000/-" },
+            { flightNumber: "AI202", departure: "BOM", arrival: "BLR", time: "2:30 PM", duration: "1.5h", cost: "9600/-" },
+            { flightNumber: "AI203", departure: "BOM", arrival: "HYD", time: "3:00 PM", duration: "2h", cost: "11500/-" },
+            { flightNumber: "AI204", departure: "BOM", arrival: "MAA", time: "5:30 PM", duration: "1.5h", cost: "8500/-" },
+            { flightNumber: "AI205", departure: "BOM", arrival: "CCU", time: "6:30 PM", duration: "2h", cost: "10000/-" },
+            { flightNumber: "AI206", departure: "BOM", arrival: "AMD", time: "8:00 AM", duration: "1.5h", cost: "6000/-" },
+            { flightNumber: "AI207", departure: "BOM", arrival: "GOI", time: "10:00 AM", duration: "1h", cost: "4000/-" },
+            { flightNumber: "AI208", departure: "BOM", arrival: "COK", time: "12:30 PM", duration: "2h", cost: "5000/-" },
+            { flightNumber: "AI209", departure: "BOM", arrival: "PNQ", time: "1:30 PM", duration: "1h", cost: "4500/-" },
+
+            // Bangalore to others
+            { flightNumber: "AI301", departure: "BLR", arrival: "DEL", time: "10:00 AM", duration: "2.5h", cost: "13000/-" },
+            { flightNumber: "AI302", departure: "BLR", arrival: "BOM", time: "12:30 PM", duration: "1.5h", cost: "9000/-" },
+            { flightNumber: "AI303", departure: "BLR", arrival: "HYD", time: "2:00 PM", duration: "1h", cost: "5000/-" },
+            { flightNumber: "AI304", departure: "BLR", arrival: "MAA", time: "4:30 PM", duration: "1.5h", cost: "6500/-" },
+            { flightNumber: "AI305", departure: "BLR", arrival: "CCU", time: "6:00 PM", duration: "2.5h", cost: "8000/-" },
+            { flightNumber: "AI306", departure: "BLR", arrival: "AMD", time: "8:30 AM", duration: "2h", cost: "6000/-" },
+            { flightNumber: "AI307", departure: "BLR", arrival: "GOI", time: "10:00 AM", duration: "1h", cost: "4000/-" },
+            { flightNumber: "AI308", departure: "BLR", arrival: "COK", time: "12:30 PM", duration: "1.5h", cost: "5800/-" },
+            { flightNumber: "AI309", departure: "BLR", arrival: "PNQ", time: "1:30 PM", duration: "2h", cost: "7000/-" },
+
+            // Hyderabad to others
+            { flightNumber: "AI401", departure: "HYD", arrival: "DEL", time: "8:30 AM", duration: "2.5h", cost: "11500/-" },
+            { flightNumber: "AI402", departure: "HYD", arrival: "BOM", time: "10:00 AM", duration: "2h", cost: "10000/-" },
+            { flightNumber: "AI403", departure: "HYD", arrival: "BLR", time: "12:00 PM", duration: "1h", cost: "5000/-" },
+            { flightNumber: "AI404", departure: "HYD", arrival: "MAA", time: "2:00 PM", duration: "1.5h", cost: "7500/-" },
+            { flightNumber: "AI405", departure: "HYD", arrival: "CCU", time: "4:00 PM", duration: "2.5h", cost: "9000/-" },
+            { flightNumber: "AI406", departure: "HYD", arrival: "AMD", time: "6:30 AM", duration: "2h", cost: "6500/-" },
+            { flightNumber: "AI407", departure: "HYD", arrival: "GOI", time: "9:00 AM", duration: "1h", cost: "4500/-" },
+            { flightNumber: "AI408", departure: "HYD", arrival: "COK", time: "11:30 AM", duration: "1.5h", cost: "5800/-" },
+            { flightNumber: "AI409", departure: "HYD", arrival: "PNQ", time: "2:30 PM", duration: "2h", cost: "7000/-" },
+
+            // Chennai to others
+            { flightNumber: "AI501", departure: "MAA", arrival: "DEL", time: "8:30 AM", duration: "3h", cost: "15500/-" },
+            { flightNumber: "AI502", departure: "MAA", arrival: "BOM", time: "10:00 AM", duration: "1.5h", cost: "8500/-" },
+            { flightNumber: "AI503", departure: "MAA", arrival: "BLR", time: "12:00 PM", duration: "1.5h", cost: "6500/-" },
+            { flightNumber: "AI504", departure: "MAA", arrival: "HYD", time: "2:00 PM", duration: "1.5h", cost: "7500/-" },
+            { flightNumber: "AI505", departure: "MAA", arrival: "CCU", time: "4:00 PM", duration: "2.5h", cost: "9000/-" },
+            { flightNumber: "AI506", departure: "MAA", arrival: "AMD", time: "6:30 AM", duration: "3h", cost: "9500/-" },
+            { flightNumber: "AI507", departure: "MAA", arrival: "GOI", time: "9:00 AM", duration: "1h", cost: "4000/-" },
+            { flightNumber: "AI508", departure: "MAA", arrival: "COK", time: "11:30 AM", duration: "1.5h", cost: "5800/-" },
+            { flightNumber: "AI509", departure: "MAA", arrival: "PNQ", time: "2:30 PM", duration: "2h", cost: "7000/-" },
+
+            // Kolkata to others
+            { flightNumber: "AI601", departure: "CCU", arrival: "DEL", time: "8:30 AM", duration: "2.5h", cost: "13000/-" },
+            { flightNumber: "AI602", departure: "CCU", arrival: "BOM", time: "10:00 AM", duration: "2.5h", cost: "10000/-" },
+            { flightNumber: "AI603", departure: "CCU", arrival: "BLR", time: "12:00 PM", duration: "2.5h", cost: "9000/-" },
+            { flightNumber: "AI604", departure: "CCU", arrival: "HYD", time: "2:00 PM", duration: "2.5h", cost: "9500/-" },
+            { flightNumber: "AI605", departure: "CCU", arrival: "MAA", time: "4:00 PM", duration: "2.5h", cost: "8000/-" },
+            { flightNumber: "AI606", departure: "CCU", arrival: "AMD", time: "6:30 AM", duration: "3h", cost: "12000/-" },
+            { flightNumber: "AI607", departure: "CCU", arrival: "GOI", time: "9:00 AM", duration: "2h", cost: "7000/-" },
+            { flightNumber: "AI608", departure: "CCU", arrival: "COK", time: "11:30 AM", duration: "2h", cost: "6000/-" },
+            { flightNumber: "AI609", departure: "CCU", arrival: "PNQ", time: "2:30 PM", duration: "2.5h", cost: "8000/-" },
+
+            // Ahmedabad to others
+            { flightNumber: "AI701", departure: "AMD", arrival: "DEL", time: "8:30 AM", duration: "2.5h", cost: "12000/-" },
+            { flightNumber: "AI702", departure: "AMD", arrival: "BOM", time: "10:00 AM", duration: "1.5h", cost: "6000/-" },
+            { flightNumber: "AI703", departure: "AMD", arrival: "BLR", time: "12:00 PM", duration: "2h", cost: "7000/-" },
+            { flightNumber: "AI704", departure: "AMD", arrival: "HYD", time: "2:00 PM", duration: "2.5h", cost: "8500/-" },
+            { flightNumber: "AI705", departure: "AMD", arrival: "MAA", time: "4:00 PM", duration: "2.5h", cost: "9000/-" },
+            { flightNumber: "AI706", departure: "AMD", arrival: "CCU", time: "6:30 AM", duration: "3h", cost: "8000/-" },
+            { flightNumber: "AI707", departure: "AMD", arrival: "GOI", time: "9:00 AM", duration: "1h", cost: "4000/-" },
+            { flightNumber: "AI708", departure: "AMD", arrival: "COK", time: "11:30 AM", duration: "1.5h", cost: "5000/-" },
+            { flightNumber: "AI709", departure: "AMD", arrival: "PNQ", time: "2:30 PM", duration: "2h", cost: "6000/-" },
+
+            // Goa to others
+            { flightNumber: "AI801", departure: "GOI", arrival: "DEL", time: "8:30 AM", duration: "2h", cost: "11500/-" },
+            { flightNumber: "AI802", departure: "GOI", arrival: "BOM", time: "10:00 AM", duration: "1h", cost: "4000/-" },
+            { flightNumber: "AI803", departure: "GOI", arrival: "BLR", time: "12:00 PM", duration: "1h", cost: "5000/-" },
+            { flightNumber: "AI804", departure: "GOI", arrival: "HYD", time: "2:00 PM", duration: "1.5h", cost: "5800/-" },
+            { flightNumber: "AI805", departure: "GOI", arrival: "MAA", time: "4:00 PM", duration: "2.5h", cost: "7000/-" },
+            { flightNumber: "AI806", departure: "GOI", arrival: "CCU", time: "6:30 AM", duration: "2h", cost: "6000/-" },
+            { flightNumber: "AI807", departure: "GOI", arrival: "AMD", time: "9:00 AM", duration: "1.5h", cost: "5000/-" },
+            { flightNumber: "AI808", departure: "GOI", arrival: "COK", time: "11:30 AM", duration: "1h", cost: "4500/-" },
+            { flightNumber: "AI809", departure: "GOI", arrival: "PNQ", time: "2:30 PM", duration: "2h", cost: "7000/-" },
+
+            // Cochin to others
+            { flightNumber: "AI901", departure: "COK", arrival: "DEL", time: "8:30 AM", duration: "3h", cost: "15500/-" },
+            { flightNumber: "AI902", departure: "COK", arrival: "BOM", time: "10:00 AM", duration: "1.5h", cost: "8500/-" },
+            { flightNumber: "AI903", departure: "COK", arrival: "BLR", time: "12:00 PM", duration: "1.5h", cost: "6500/-" },
+            { flightNumber: "AI904", departure: "COK", arrival: "HYD", time: "2:00 PM", duration: "1.5h", cost: "7500/-" },
+            { flightNumber: "AI905", departure: "COK", arrival: "MAA", time: "4:00 PM", duration: "2.5h", cost: "9000/-" },
+            { flightNumber: "AI906", departure: "COK", arrival: "CCU", time: "6:30 AM", duration: "3h", cost: "9500/-" },
+            { flightNumber: "AI907", departure: "COK", arrival: "AMD", time: "9:00 AM", duration: "1h", cost: "4000/-" },
+            { flightNumber: "AI908", departure: "COK", arrival: "GOI", time: "11:30 AM", duration: "1.5h", cost: "5800/-" },
+            { flightNumber: "AI909", departure: "COK", arrival: "PNQ", time: "2:30 PM", duration: "2h", cost: "7000/-" },
+
+            // Pune to others
+            { flightNumber: "AI1001", departure: "PNQ", arrival: "DEL", time: "8:30 AM", duration: "3h", cost: "15500/-" },
+            { flightNumber: "AI1002", departure: "PNQ", arrival: "BOM", time: "10:00 AM", duration: "1.5h", cost: "8500/-" },
+            { flightNumber: "AI1003", departure: "PNQ", arrival: "BLR", time: "12:00 PM", duration: "1.5h", cost: "6500/-" },
+            { flightNumber: "AI1004", departure: "PNQ", arrival: "HYD", time: "2:00 PM", duration: "1.5h", cost: "7500/-" },
+            { flightNumber: "AI1005", departure: "PNQ", arrival: "MAA", time: "4:00 PM", duration: "2.5h", cost: "9000/-" },
+            { flightNumber: "AI1006", departure: "PNQ", arrival: "CCU", time: "6:30 AM", duration: "3h", cost: "9500/-" },
+            { flightNumber: "AI1007", departure: "PNQ", arrival: "AMD", time: "9:00 AM", duration: "1h", cost: "4000/-" },
+            { flightNumber: "AI1008", departure: "PNQ", arrival: "GOI", time: "11:30 AM", duration: "1.5h", cost: "5800/-" },
+            { flightNumber: "AI1009", departure: "PNQ", arrival: "COK", time: "2:30 PM", duration: "2h", cost: "7000/-" },
+        ];
+
+        function filterFlights() {
+            const departure = document.getElementById("departure").value;
+            const arrival = document.getElementById("arrival").value;
+            const flightTableBody = document.getElementById("flightTableBody");
+
+            
+            flightTableBody.innerHTML = "";
+
+           
+            const filteredFlights = flights.filter(flight => flight.departure === departure && flight.arrival === arrival);
+
+           
+            if (filteredFlights.length > 0) {
+                filteredFlights.forEach(flight => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${flight.flightNumber}</td>
+                        <td>${flight.departure}</td>
+                        <td>${flight.arrival}</td>
+                        <td>${flight.time}</td>
+                        <td>${flight.duration}</td>
+                        <td>${flight.cost}</td>
+                    `;
+                    flightTableBody.appendChild(row);
+                });
+            } else {
+                
+                const row = document.createElement("tr");
+                row.innerHTML = `<td colspan="6" style="text-align:center;">No flights available</td>`;
+                flightTableBody.appendChild(row);
+            }
+        }
+    </script>
+</body>
+</html>

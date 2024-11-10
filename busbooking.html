@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bus Booking</title>
+  <link rel="stylesheet" href="busbookingstyles.css">
+  
+</head>
+<body>
+  <a href="home.html" class="home-button">Home</a>
+
+<div class="booking-form">
+  <h2>Bus Booking</h2>
+  <label for="origin">Origin City:</label>
+  <select id="origin" name="origin">
+    <option value="Mumbai">Mumbai</option>
+    <option value="Delhi">Delhi</option>
+    <option value="Bangalore">Bangalore</option>
+    <option value="Kolkata">Kolkata</option>
+    <option value="Chennai">Chennai</option>
+    <option value="Hyderabad">Hyderabad</option>
+    <option value="Pune">Pune</option>
+    <option value="Jaipur">Jaipur</option>
+    <option value="Ahmedabad">Ahmedabad</option>
+  </select>
+
+  <label for="destination">Destination City:</label>
+  <select id="destination" name="destination">
+    <option value="Mumbai">Mumbai</option>
+    <option value="Delhi">Delhi</option>
+    <option value="Bangalore">Bangalore</option>
+    <option value="Kolkata">Kolkata</option>
+    <option value="Chennai">Chennai</option>
+    <option value="Hyderabad">Hyderabad</option>
+    <option value="Pune">Pune</option>
+    <option value="Jaipur">Jaipur</option>
+    <option value="Ahmedabad">Ahmedabad</option>
+  </select>
+
+  <label for="date">Travel Date:</label>
+  <input type="date" id="date" name="date" required>
+
+  <button onclick="searchBuses()">Search Buses</button>
+</div>
+
+<div class="bus-results" id="busResults">
+  <h3>Available Buses</h3>
+</div>
+
+<script>
+  function searchBuses() {
+    const origin = document.getElementById("origin").value;
+    const destination = document.getElementById("destination").value;
+    const date = document.getElementById("date").value;
+
+    if (origin && destination && date) {
+      const buses = [
+        { name: "Express Line", departure: "08:00 AM", arrival: "12:00 PM", price: "₹1200", travelTime: "4 hrs" },
+        { name: "Fast Travels", departure: "10:30 AM", arrival: "03:30 PM", price: "₹1500", travelTime: "5 hrs" },
+        { name: "Night Owl Service", departure: "07:45 PM", arrival: "11:45 PM", price: "₹1000", travelTime: "4 hrs" },
+        { name: "Luxury Bus Co.", departure: "09:00 AM", arrival: "02:00 PM", price: "₹2000", travelTime: "5 hrs" },
+      ];
+
+      const busResultsDiv = document.getElementById("busResults");
+      busResultsDiv.innerHTML = "<h3>Available Buses</h3>";
+      busResultsDiv.style.display = "block";
+
+      buses.forEach(bus => {
+        const busItem = document.createElement("div");
+        busItem.classList.add("bus-item");
+        busItem.innerHTML = `
+          <strong>${bus.name}</strong><br>
+          Departure: ${bus.departure}<br>
+          Arrival: ${bus.arrival}<br>
+          Travel Time: ${bus.travelTime}<br>
+          Price: ${bus.price}
+        `;
+        busResultsDiv.appendChild(busItem);
+      });
+    } else {
+      alert("Please fill all the fields");
+    }
+  }
+</script>
+
+</body>
+</html>

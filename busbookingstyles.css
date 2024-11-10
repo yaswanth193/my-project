@@ -1,0 +1,75 @@
+body {
+    font-family: Arial, sans-serif;
+    background: url('https://img.freepik.com/premium-photo/book-bus-tickets-online-smartphone-which-bus-stop-tickets-bus-yellow-background_407474-2982.jpg?w=826') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: white;
+    flex-direction: column;
+    overflow-x: hidden; 
+  }
+
+  .booking-form, .bus-results {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #f3f4f6;
+    padding: 25px;
+    border-radius: 15px;
+    width: 320px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+    margin-top: 20px;
+  }
+
+  select, input[type="date"], button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+  }
+
+  select, input[type="date"] {
+    background-color: #444;
+    color: #f3f4f6;
+  }
+
+  button {
+    background-color: #007BFF;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  .bus-results {
+    display: none;
+    margin-top: 20px;
+  }
+
+  .bus-item {
+    background-color: #555;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    text-align: left;
+  }
+  .home-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color:  #ffc107;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none; 
+}

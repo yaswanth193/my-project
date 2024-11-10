@@ -1,0 +1,111 @@
+body {
+    background-color: #1b1b1b;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    position: relative; 
+    background-image: url('https://img.freepik.com/free-photo/close-up-golden-glitter_23-2148761513.jpg?t=st=1731236236~exp=1731239836~hmac=31dfe3d989a26f341a75343275cf215427316fd3b1204eefd9e77cf3df26870e&w=826');
+}
+
+
+.home-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #ffc107;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    color: #333;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.home-button:hover {
+    background-color: #ffda6b;
+}
+
+h1 {
+    color: #ffc107;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.contact-info {
+    background-color: rgba(41, 41, 41, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.contact-info p {
+    margin: 5px 0;
+    font-size: 1.1em;
+}
+
+.contact-info a {
+    color: #ffc107;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-info a:hover {
+    color: #ffda6b;
+}
+
+.contact-form {
+    background-color: rgba(41, 41, 41, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.contact-form label {
+    display: block;
+    margin-top: 10px;
+    color: #ffc107;
+    font-weight: bold;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #ffffff;
+    font-size: 1em;
+}
+
+.contact-form textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+.contact-form button {
+    background-color: #ffc107;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+}
+
+.contact-form button:hover {
+    background-color: #ffda6b;
+}

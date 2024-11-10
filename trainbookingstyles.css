@@ -1,0 +1,92 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('https://img.freepik.com/premium-photo/train-is-tracks-with-sunset-background_924629-226498.jpg?w=826');
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    backdrop-filter: blur(5px);
+}
+.home-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 15px;
+    background-color: rgba(255, 165, 0, 0.8);
+    color: #121212;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    text-align: center;
+}
+.home-button:hover {
+    background-color: #ff8800;
+}
+.booking-form {
+    background-color: rgba(30, 30, 30, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 400px;
+    margin-top: 100px;
+}
+.booking-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ffa500;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+.form-group select, .form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #333;
+    color: #ffffff;
+}
+.submit-btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #ffa500;
+    color: #121212;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.submit-btn:hover {
+    background-color: #ff8800;
+}
+.train-results {
+    background-color: rgba(30, 30, 30, 0.9);
+    color: #ffffff;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 400px;
+}
+.train-results h3 {
+    text-align: center;
+    color: #ffa500;
+}
+.train-details {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: rgba(50, 50, 50, 0.9);
+    border-radius: 5px;
+}

@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('https://img.freepik.com/free-photo/composition-cotton-airline-toy-jet_23-2148169868.jpg?t=st=1730775995~exp=1730779595~hmac=5a810ddfdb9d434e0b540ba874fa3e97f97c01fd2d9f4bf9e076ea23e691e986&w=826'); /* Background image */
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+    margin: 0;
+    padding: 20px;
+}
+h1 {
+    text-align: center;
+    color: gold;} 
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: rgba(30, 30, 30, 0.8); 
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: gold; 
+}
+select, input[type="date"], button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 4px;
+}
+button {
+    background-color: #FF4500; 
+    color: white;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #FF6347; 
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: rgba(50, 50, 50, 0.8); 
+}
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #444;
+    color: #FFD700; 
+}
+th {
+    background-color: #2e2e2e;
+}
+tr:hover {
+    background-color: #333;
+}
+.home-button {
+position: absolute;
+top: 20px;
+left: 20px;
+background-color:  #ffc107;
+color: white;
+padding: 10px 20px;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+text-decoration: none; 
+}
+
+
